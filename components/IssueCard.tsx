@@ -44,7 +44,7 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({title,id,commentCount,isS
                 <AvatarImage src={author.image ?? ""} alt="profile" className="object-cover" ></AvatarImage>
                 <AvatarFallback>Profile</AvatarFallback>
             </Avatar>
-            <div className="flex flex-col">
+            <div className="flex flex-col font-nokora">
                 <div>
                     {author.username} asked on {format(new Date(createdAt), "MM/dd/yyyy',' h:mm a")} · {commentCount} Messages | {voteAmt} votes
                 </div>

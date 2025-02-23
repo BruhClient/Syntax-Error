@@ -96,7 +96,7 @@ const EditIssue: FunctionComponent<EditIssueProps> = ({issue,initialVotes,curren
                             />
                                 
                             </h2>
-                            <div className="flex text-muted-foreground text-sm items-center gap-2">
+                            <div className="flex text-muted-foreground text-sm items-center gap-2 font-nokora">
                         
                                     {issue.isSolved ? <div className="border-2 border-green-300 text-green-300 px-3 py-1 rounded-lg">Answered</div> : <div className="border-2 border-muted-foreground px-3 py-1 rounded-lg">Unanswered</div>}
                             
@@ -135,7 +135,7 @@ const EditIssue: FunctionComponent<EditIssueProps> = ({issue,initialVotes,curren
                                             
                                         )}
                                     />
-            <div className="flex gap-2 w-full">
+            <div className="flex gap-2 w-full flex-wrap">
                 <Button variant={"outline"} className="flex-1" type="submit" disabled={isPending}>{isPending ? "Loading..." : "Save Changes"}</Button>
                 <SolvedButton issueId={issue.id} isSolved={issue.isSolved} />
                 <DeleteIssueButton id={issue.id}/>

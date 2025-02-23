@@ -1,19 +1,20 @@
 "use client"
 
+
 import { useEffect, useState } from "react"
 
-export const useDebounce = (input : string,delay=500)  => { 
-    const [debounceValue,setDebounceValue] = useState(input)
+export const useDebounce = (value : string,delay = 500) => { 
+
+    const [debounceValue, setDebounceValue] = useState(value)
 
     useEffect(() => { 
-        const timer = setTimeout(()=> {
-            setDebounceValue(input)
-        },delay)
+        const timeout = setTimeout(() => { 
+            setDebounceValue(value)
+        },500)
 
-        return () => { 
-            clearTimeout(timer)
-        }
-    },[input])
+        return () => clearTimeout(timeout)
+
+    } , [value])
 
 
     return debounceValue

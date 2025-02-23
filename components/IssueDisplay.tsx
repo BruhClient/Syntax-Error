@@ -20,7 +20,7 @@ const IssueDisplay: FunctionComponent<IssueDisplayProps> = ({issue,initialVotes,
                 <h2>
                     {issue.title}
                 </h2>
-                <div className="flex text-muted-foreground text-md items-center gap-2">
+                <div className="flex text-muted-foreground text-md items-center gap-2 font-nokora">
             
                         {issue.isSolved ? <div className="border-2 border-green-300 text-green-300 px-3 py-1 rounded-lg">Answered</div> : <div className="border-2 border-muted-foreground px-3 py-1 rounded-lg">Unanswered</div>}
                 
