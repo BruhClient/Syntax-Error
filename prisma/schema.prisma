@@ -1,0 +1,159 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model User {
+  id                String             @id @default(cuid())
+  name              String?
+  hashedPassword    String?
+  email             String?            @unique
+  emailVerified     DateTime?          @map("email_verified")
+  image             String?
+  username          String?            @unique
+  issues            Issue[]
+  votes             Vote[]
+  comment           Comment[]
+  commentVotes      CommentVote[]
+  commentReplies    CommentReply[]
+  commentReplyVotes CommentReplyVote[]
+  role              UserRole           @default(USER)
+
+  accounts Account[]
+  sessions Session[]
+
+  @@map("users")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model VerificationToken {
+  id    String @id @default(cuid())
+  email String
+  token String @unique
+
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model Issue {
+  id        String    @id @default(cuid())
+  content   Json
+  title     String
+  author    User      @relation(fields: [authorId], references: [id] , onDelete: Cascade)
+  authorId  String
+  threads   String[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  isSolved  Boolean   @default(false)
+  comments  Comment[]
+  votes     Vote[]
+}
+
+model Vote {
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+
+  issue   Issue    @relation(fields: [issueId], references: [id])
+  issueId String
+  type    VoteType
+
+  @@id([authorId, issueId])
+}
+
+enum VoteType {
+  UP
+  DOWN
+}
+
+model Comment {
+  id         String         @id @default(cuid())
+  author     User           @relation(fields: [authorId], references: [id] , onDelete: Cascade)
+  authorId   String
+  issue      Issue          @relation(fields: [issueId], references: [id] , onDelete: Cascade)
+  issueId    String
+  content    Json
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+  replies    CommentReply[]
+  votes      CommentVote[]
+  isSolution Boolean        @default(false)
+}
+
+model CommentVote {
+  author    User     @relation(fields: [authorId], references: [id] , onDelete: Cascade)
+  authorId  String
+  comment   Comment  @relation(fields: [commentId], references: [id] , onDelete: Cascade)
+  commentId String
+  type      VoteType
+
+  @@id([authorId, commentId])
+}
+
+model CommentReply {
+  id        String   @id @default(cuid())
+  author    User     @relation(fields: [authorId], references: [id] , onDelete: Cascade)
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId String
+
+  message String
+
+  votes CommentReplyVote[]
+}
+
+model CommentReplyVote {
+  author         User         @relation(fields: [authorId], references: [id])
+  authorId       String
+  commentReply   CommentReply @relation(fields: [commentReplyId], references: [id])
+  commentReplyId String
+  type           VoteType
+
+  @@id([authorId, commentReplyId])
+}

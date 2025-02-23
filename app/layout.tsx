@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {  Inter, Nokora } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import MainProvider from "@/components/providers/MainProvider";
+import { Toaster } from "@/components/ui/toaster";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  weight:["400","600","800"]
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const nokora = Nokora({
+  variable: "--font-nokora",
   subsets: ["latin"],
+  weight: ["400","700"]
 });
 
 export const metadata: Metadata = {
@@ -19,15 +24,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal
 }: Readonly<{
   children: React.ReactNode;
+  modal : React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${nokora.variable} ${inter.variable} antialiased font-inter`}
       >
-        {children}
+        <MainProvider>
+          <Toaster />
+          <Navbar />
+          {modal}
+          {children}
+          
+        </MainProvider>
+        
       </body>
     </html>
   );
