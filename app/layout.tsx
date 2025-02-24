@@ -19,7 +19,28 @@ const nokora = Nokora({
 
 export const metadata: Metadata = {
   title: "Syntax Error",
-  description: "Created by Travis Ang",
+  icons :{
+    icon : "/favicon.svg"
+  },
+  description: "Coded and designed by Travis Ang",
+  keywords : ["NextJs" , "TypeScript","JavaScript"], 
+  metadataBase : new URL("https://my-cook-pal.vercel.app"), 
+  twitter : { 
+    card: "summary_large_image", 
+    site : "https://my-cook-pal.vercel.app", 
+    creator : "@TravisAng", 
+    title : "My Cook Pal - Recipe App", 
+    description : "Find a recipe that suits ur taste buds", 
+    images: ["feature.png"]
+  }, 
+  openGraph : { 
+    title : "My Cook Pal - Recipe App", 
+    description : "Find a recipe that suits ur taste buds", 
+    url : "https://my-cook-pal.vercel.app",
+    siteName :"My Cook Pal",
+    images: ["feature.png"], 
+
+  }
 };
 
 export default function RootLayout({
