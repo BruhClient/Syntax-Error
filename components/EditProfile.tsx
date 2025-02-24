@@ -73,8 +73,7 @@ const EditProfileDialog: FunctionComponent<EditProfileDialogProps> = ({initialEm
                        
                       },
                     });
-                    // you can run some server action or api here
-                    // to add the necessary data to your database
+                    
                     values.image = res.url
                     }
 

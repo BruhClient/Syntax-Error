@@ -55,20 +55,6 @@ const CreateNewIssue = () => {
                     })
                 }
 
-                if (values.content.blocks) { 
-                    for (let i=0 ; i < values.content.blocks.length ; i ++) { 
-                        const block = values.content.blocks[i]
-
-                        if (block.type === "image") {
-                            const imageUrl = block.data.file.url 
-
-                            await edgestore.publicFiles.confirmUpload( { 
-                                url : imageUrl
-                            })
-                        }
-
-                    }
-                }
                 
 
 

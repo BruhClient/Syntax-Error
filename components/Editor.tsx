@@ -1,7 +1,7 @@
 "use client"
 // This is my Editorjs component, better if make a seperate component and use it
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import Code from "@editorjs/code";
@@ -11,17 +11,24 @@ import Paragraph from "@editorjs/paragraph";
 import ImageTool from '@editorjs/image';
 import { useEdgeStore } from "./providers/EdgestoreProvider";
 import LinkTool from "@editorjs/link";
-
 function Editor({ data, onChange, holder,editorRef,placeholder="Start writting here.." } : {data : any , onChange : any, holder : string , editorRef : any , placeholder? : string }) {
   //add a reference to editor
   
   const { edgestore } = useEdgeStore();
+
   //initialize editorjs
+
+  const ref = useRef<string[]>([]) 
+  
+  
   useEffect(() => {
     //initialize editor if we don't have a reference
     if (!editorRef.current) {
       const editor = new EditorJS({
         holder: holder,
+        onReady : () => {
+          ref.current = []
+        },
         placeholder: placeholder,
         tools: {
             header: Header ,
@@ -38,6 +45,7 @@ function Editor({ data, onChange, holder,editorRef,placeholder="Start writting h
             image : { 
               class : ImageTool, 
               config : { 
+                
                 uploader : { 
                   async uploadByFile(file : File) { 
                     
@@ -46,7 +54,7 @@ function Editor({ data, onChange, holder,editorRef,placeholder="Start writting h
                         type : "issue"
                       }, 
                       options : { 
-                        temporary : true
+                   
                       }, 
                       file,
                       onProgressChange: (progress) => {
@@ -55,6 +63,9 @@ function Editor({ data, onChange, holder,editorRef,placeholder="Start writting h
                       },
                     });
 
+                    
+                    ref.current = [...ref.current,res.url]
+                    
                     return {
                       success: 1,
                       file: {
@@ -69,6 +80,7 @@ function Editor({ data, onChange, holder,editorRef,placeholder="Start writting h
                 }
               }
             } 
+            
 
 
         
@@ -76,9 +88,33 @@ function Editor({ data, onChange, holder,editorRef,placeholder="Start writting h
             
             , 
         data,
-        async onChange(api, event) {
-          const content = await api.saver.save();
         
+        async onChange(api,event) {
+          const currentImages : string[] = []
+          const uploadedImages = ref.current 
+          
+          document.querySelectorAll('.image-tool__image-picture').forEach((x) => currentImages.push(x.attributes[1].nodeValue!))
+
+          console.log("CURRENT IMAGES",currentImages)
+          console.log("UPLOADED IMAGES",uploadedImages)
+          if (uploadedImages.length > currentImages.length) {
+            uploadedImages.forEach(async (img) => {
+              if (!currentImages.includes(img)) {
+                await edgestore.publicFiles.delete({ 
+                  url : img
+                })
+              }
+              ref.current = uploadedImages.filter((x) => x !== img)
+            }
+          )
+
+          
+        }
+
+
+      
+          const content = await api.saver.save();
+          
           onChange(content);
         },
       });
@@ -87,6 +123,21 @@ function Editor({ data, onChange, holder,editorRef,placeholder="Start writting h
 
     //add a return function handle cleanup
     return () => {
+
+      
+
+      ref.current.forEach(async (img) => {
+        
+          await edgestore.publicFiles.delete({ 
+            url : img
+          })
+        
+        
+      })
+
+      ref.current = []
+
+
       if (editorRef.current && editorRef.current.destroy) {
         editorRef.current.destroy();
       }

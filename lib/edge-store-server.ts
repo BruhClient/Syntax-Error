@@ -11,7 +11,8 @@ const edgeStoreRouter = es.router({
    
     return true; // allow delete
   }).input(z.object({
-    type : z.enum(["issue","profile"])
+    type : z.enum(["issue","profile"]), 
+    
   })).path(({input}) => [{type : input.type}]),
   
 });
