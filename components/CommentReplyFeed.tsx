@@ -11,7 +11,6 @@ import { Button } from "./ui/button";
 import { ChevronDown } from "lucide-react";
 import { Skeleton } from "./ui/skeleton";
 import CommentReplyInput from "./CommentReplyInput";
-import { DeleteCommentButton } from "./DeleteCommentButton";
 import { useSessionUser } from "@/hooks/use-session";
 
 interface CommentReplyFeedProps {

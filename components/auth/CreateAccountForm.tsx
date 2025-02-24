@@ -1,6 +1,6 @@
 "use client"
 
-import { FunctionComponent, useTransition } from "react";
+import { useTransition } from "react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { useForm } from "react-hook-form";
 
@@ -47,7 +47,7 @@ const CreateAccountForm = () => {
                         title : data.success
                     })
                 }
-                form.reset()
+               
             })
         })
 

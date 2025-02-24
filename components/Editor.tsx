@@ -42,6 +42,12 @@ function Editor({ data, onChange, holder,editorRef,placeholder="Start writting h
                   async uploadByFile(file : File) { 
                     
                     const res = await edgestore.publicFiles.upload({
+                      input : { 
+                        type : "issue"
+                      }, 
+                      options : { 
+                        temporary : true
+                      }, 
                       file,
                       onProgressChange: (progress) => {
                         // you can use this to show a progress bar

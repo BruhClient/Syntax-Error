@@ -1,6 +1,6 @@
 "use client"
 
-import { FunctionComponent, useTransition } from "react";
+import { Dispatch, FunctionComponent, SetStateAction, useState, useTransition } from "react";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { useForm } from "react-hook-form";
 
@@ -20,10 +20,10 @@ import { OctagonAlert } from "lucide-react";
 
 
 interface SignInFormProps {
-    
+    setIsResettingPassword : Dispatch<SetStateAction<boolean>>
 }
  
-const SignInForm: FunctionComponent<SignInFormProps> = () => {
+const SignInForm: FunctionComponent<SignInFormProps> = ({setIsResettingPassword}) => {
 
     const form = useForm<SignInPayload>({ 
         resolver : zodResolver(SignInSchema), 
@@ -35,6 +35,8 @@ const SignInForm: FunctionComponent<SignInFormProps> = () => {
 
     const searchParams = useSearchParams()
 
+
+   
     const error = searchParams.get("error")
     const router = useRouter()
     const {update} = useSession()
@@ -108,8 +110,15 @@ const SignInForm: FunctionComponent<SignInFormProps> = () => {
                         <FormControl>
                             <Input {...field} type="password" placeholder="*****" />
                         </FormControl>
-                       
-                        <Link href={"/forgot-password"} className="text-xs">Forgot Password ?</Link>
+                 
+                        <Button variant={"link"} className="px-0" onClick={() => { 
+                            setIsResettingPassword(true)
+                        }}>
+                            Forget Password ?
+                        </Button>
+                   
+                
+                        
                         
 
                         <FormMessage />

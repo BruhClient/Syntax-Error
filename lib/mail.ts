@@ -20,3 +20,16 @@ export const sendVerificationEmail = async ( email: string , token:string ) => {
 
     
 } 
+
+export const sendPasswordVerificationEmail = async ( email: string , code:string ) => { 
+    
+    
+    await resend.emails.send({ 
+        from : "mail@hurdle.world", 
+        to : email , 
+        subject : "Password Reset Code" , 
+        html : `<p>Your Verification Code is ${code}</p>`
+    })
+
+    
+} 

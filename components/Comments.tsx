@@ -2,7 +2,6 @@ import { prisma } from "@/lib/db";
 import { FunctionComponent } from "react";
 import CommentsFeed from "./CommentFeed";
 import { ExtendedComment } from "@/types/comment";
-import { Comment } from "@prisma/client";
 interface CommentsProps {
     issueId : string, 
     commentCount : number ,

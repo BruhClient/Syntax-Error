@@ -54,7 +54,7 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({title,id,commentCount,isS
 
             </div>
         </CardDescription>
-        <div className="flex gap-2 flex-wrap text-sm text-muted-foreground">
+        <div className="flex gap-2 flex-wrap text-sm text-muted-foreground pb-3">
             {threads.map((thread) => <div key={thread}>#{thread}</div>)}
         </div>
     </Card> );

@@ -1,7 +1,7 @@
 "use client"
 
 import dynamic from "next/dynamic";
-import { FunctionComponent, startTransition, useRef, useState, useTransition } from "react";
+import { FunctionComponent, useRef, useState, useTransition } from "react";
 import EditorJS from "@editorjs/editorjs";
 import { Button } from "./ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -59,7 +59,7 @@ const CommentInput: FunctionComponent<CommentInputProps> = ({issueId}) => {
         }
      }
     return (<div className="flex flex-col gap-3">
-            <div className="border-2 border-input w-full max-h-28 overflow-auto rounded-lg p-3">
+            <div className="border-2 border-input w-full overflow-auto rounded-lg p-3">
                 <Editor
                             editorRef={ref}
                             data={content}               

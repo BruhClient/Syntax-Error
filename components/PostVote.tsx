@@ -1,11 +1,10 @@
 "use client"
 
 import { ArrowBigDown, ArrowBigUp } from "lucide-react";
-import { FunctionComponent, startTransition, useState, useTransition } from "react";
+import { FunctionComponent, useState, useTransition } from "react";
 import { Button } from "./ui/button";
 import { VoteType } from "@prisma/client";
 import { cn } from "@/lib/utils";
-import { useMutation } from "@tanstack/react-query";
 import { voteIssue } from "@/app/actions/vote-issue";
 import { usePrevious } from "@mantine/hooks";
 import { useToast } from "@/hooks/use-toast";

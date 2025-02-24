@@ -13,6 +13,7 @@ import Thread from './thread';
 import { createIssue } from '@/app/actions/create-issue';
 import { useToast } from '@/hooks/use-toast';
 import type EditorJS from "@editorjs/editorjs";
+import { useEdgeStore } from './providers/EdgestoreProvider';
 
 
 const Editor = dynamic(() => import("./Editor"), {
@@ -34,9 +35,13 @@ const CreateNewIssue = () => {
     const [threads , setThreads] = useState<string[]>([]);
     const [isPending,startTransition] = useTransition()
     const {toast} = useToast()
+
+    const {edgestore} = useEdgeStore()
     function onSubmit(values : CreateIssuePayload) { 
         startTransition(() => { 
-            createIssue(values,threads).then((data) => { 
+
+            
+            createIssue(values,threads).then(async (data) => { 
                 if (data.error ) { 
                     toast({ 
                         title : data.error , 
@@ -50,12 +55,32 @@ const CreateNewIssue = () => {
                     })
                 }
 
+                if (values.content.blocks) { 
+                    for (let i=0 ; i < values.content.blocks.length ; i ++) { 
+                        const block = values.content.blocks[i]
+
+                        if (block.type === "image") {
+                            const imageUrl = block.data.file.url 
+
+                            await edgestore.publicFiles.confirmUpload( { 
+                                url : imageUrl
+                            })
+                        }
+
+                    }
+                }
+                
+
+
+                setThreads([])
                 form.reset()
+
+                
                 if (ref.current) { 
                     ref.current.clear()
                 }
                 
-                setThreads([])
+                
 
             })
         })

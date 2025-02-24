@@ -15,7 +15,6 @@ import type EditorJS from "@editorjs/editorjs";
 import { Button } from "./ui/button";
 import { editIssue } from "@/app/actions/edit-issue";
 import { useToast } from "@/hooks/use-toast";
-import { useRouter } from "next/navigation";
 import PostVote from "./PostVote";
 import { VoteType } from "@prisma/client";
 import { DeleteIssueButton } from "./DeleteIssueButton";
@@ -44,7 +43,6 @@ const EditIssue: FunctionComponent<EditIssueProps> = ({issue,initialVotes,curren
         })
     const {toast} = useToast()
 
-    const router = useRouter()
     const [isPending,startTransition] = useTransition()
     function onSubmit(values : CreateIssuePayload) { 
             startTransition(() => { 

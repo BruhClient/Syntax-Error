@@ -25,7 +25,7 @@ function CustomCodeRenderer ({data} : any) {
    
 
     return ( 
-        <pre className="bg-input rounded-md p-4">
+        <pre className="bg-input rounded-md p-4 my-3">
             <code className="text-foreground text-sm">{data.code}</code>
         </pre>
     )

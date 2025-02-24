@@ -53,10 +53,10 @@ model User {
   username          String?            @unique
   issues            Issue[]
   votes             Vote[]
-  comment           Comment[]
+  comments          Comment[]
   commentVotes      CommentVote[]
   commentReplies    CommentReply[]
-  commentReplyVotes CommentReplyVote[]
+  commentReplyVotes CommentReplyLike[]
   role              UserRole           @default(USER)
 
   accounts Account[]
@@ -95,10 +95,10 @@ model Issue {
 }
 
 model Vote {
-  author   User   @relation(fields: [authorId], references: [id])
+  author   User   @relation(fields: [authorId], references: [id] , onDelete: Cascade )
   authorId String
 
-  issue   Issue    @relation(fields: [issueId], references: [id])
+  issue   Issue    @relation(fields: [issueId], references: [id] , onDelete: Cascade)
   issueId String
   type    VoteType
 
@@ -145,10 +145,10 @@ model CommentReply {
 
   message String
 
-  votes CommentReplyVote[]
+  likes CommentReplyLike[]
 }
 
-model CommentReplyVote {
+model CommentReplyLike {
   author         User         @relation(fields: [authorId], references: [id])
   authorId       String
   commentReply   CommentReply @relation(fields: [commentReplyId], references: [id])
@@ -156,4 +156,13 @@ model CommentReplyVote {
   type           VoteType
 
   @@id([authorId, commentReplyId])
+}
+
+model PasswordVerificationToken { 
+  id    String @id @default(cuid())
+  email String @unique
+  code  String
+
+  expires DateTime
+
 }

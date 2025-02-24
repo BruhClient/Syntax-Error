@@ -5,7 +5,7 @@ import { prisma } from "@/lib/db"
  
 
 export const deleteIssue = async (issueId : string) => { 
-
+    console.log(issueId)
     try { 
         
         await prisma.issue.delete({ 

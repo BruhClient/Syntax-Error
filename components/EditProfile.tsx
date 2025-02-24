@@ -64,6 +64,9 @@ const EditProfileDialog: FunctionComponent<EditProfileDialogProps> = ({initialEm
                     }
 
                     const res = await edgestore.publicFiles.upload({
+                        input : {
+                            type : 'profile'
+                        },
                       file,
                       onProgressChange: (progress) => {
                         // you can use this to show a progress bar

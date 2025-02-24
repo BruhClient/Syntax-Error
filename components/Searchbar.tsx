@@ -19,13 +19,13 @@ import { useQuery } from "@tanstack/react-query"
 import { queryIssues } from "@/app/actions/query-issues"
 import { ExtendedIssue } from "@/types/issue"
 import { Button } from "./ui/button"
-import Link from "next/link"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { formatTimeToNow } from "@/lib/utils"
+import { useRouter } from "next/navigation"
   
   export function Searchbar() {
     const [input,setInput] = useState<string>("")
-
+    const router = useRouter()
     const debounceValue = useDebounce(input)
 
     const {
@@ -62,8 +62,13 @@ import { formatTimeToNow } from "@/lib/utils"
           <CommandEmpty >No results found.</CommandEmpty>
           <CommandGroup>
             {query?.map((issue) => {
-              return <CommandItem key={issue.id} className="flex items-center font-nokora ">
-                <Button variant={"link"} >
+              return <CommandItem key={issue.id} className="flex items-center font-nokora " >
+                <Button variant={"link"} onClick={() => {
+                  router.push(`/issue/${issue.id}`)
+                  setInput("")
+                }
+
+                  } >
                   
                   {issue.title} - <Avatar className="w-6 h-6">
                     <AvatarImage src={issue.author.image} alt="profile" ></AvatarImage>
