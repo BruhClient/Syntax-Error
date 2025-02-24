@@ -19,6 +19,7 @@ import PostVote from "./PostVote";
 import { VoteType } from "@prisma/client";
 import { DeleteIssueButton } from "./DeleteIssueButton";
 import SolvedButton from "./SolvedButton";
+import { useRouter } from "next/navigation";
 
 const Editor = dynamic(() => import("./Editor"), {
     ssr: false,
@@ -42,7 +43,7 @@ const EditIssue: FunctionComponent<EditIssueProps> = ({issue,initialVotes,curren
             }
         })
     const {toast} = useToast()
-
+    const router = useRouter()
     const [isPending,startTransition] = useTransition()
     function onSubmit(values : CreateIssuePayload) { 
             startTransition(() => { 
@@ -59,6 +60,8 @@ const EditIssue: FunctionComponent<EditIssueProps> = ({issue,initialVotes,curren
                             title : data.success
                         })
                     }
+
+                    router.refresh()
                 })
             })
         }
