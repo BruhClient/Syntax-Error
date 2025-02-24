@@ -13,13 +13,13 @@ interface IssueDisplayProps {
  
 const IssueDisplay: FunctionComponent<IssueDisplayProps> = ({issue,initialVotes,currentVote}) => {
     
-    return ( <div>
-        <div className="flex w-full items-center gap-6 ">
+    return ( <div className="">
+        <div className="flex w-full items-center gap-6 py-2 ">
             <PostVote initialVote={currentVote} initialVotes={initialVotes} issueId={issue.id}/>
-            <div>
-                <h2>
+            <div className="flex flex-col gap-4">
+                <div className="lg:text-5xl md:text-4xl text-2xl">
                     {issue.title}
-                </h2>
+                </div>
                 <div className="flex text-muted-foreground text-md items-center gap-2 font-nokora">
             
                         {issue.isSolved ? <div className="border-2 border-green-300 text-green-300 px-3 py-1 rounded-lg">Answered</div> : <div className="border-2 border-muted-foreground px-3 py-1 rounded-lg">Unanswered</div>}
