@@ -65,7 +65,7 @@ const UserProfilePage = async ({params} : { params : Promise<{ slug : string}>})
     }
     return ( <div className="w-full flex pb-8 flex-col items-center justify-center gap-3 px-3 py-4">
             <Avatar className="w-44 h-44">
-                <AvatarImage src={user?.image ?? ""} alt="profile"></AvatarImage>
+                <AvatarImage src={user?.image ?? ""} className="object-cover" alt="profile"></AvatarImage>
                 <AvatarFallback>Profile</AvatarFallback>
             </Avatar>
             <div className="text-lg flex gap-2 items-center">
