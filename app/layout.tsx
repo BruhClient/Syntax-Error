@@ -17,6 +17,8 @@ const nokora = Nokora({
   weight: ["400","700"]
 });
 
+
+
 export const metadata: Metadata = {
   title: "Syntax Error",
   icons :{
@@ -24,23 +26,26 @@ export const metadata: Metadata = {
   },
   description: "Coded and designed by Travis Ang",
   keywords : ["NextJs" , "TypeScript","JavaScript"], 
-  metadataBase : new URL("https://my-cook-pal.vercel.app"), 
+  metadataBase : new URL("https://syntax-error-hvu9.vercel.app"), 
   twitter : { 
     card: "summary_large_image", 
-    site : "https://my-cook-pal.vercel.app", 
+    site : "https://syntax-error-hvu9.vercel.app", 
     creator : "@TravisAng", 
-    title : "My Cook Pal - Recipe App", 
-    description : "Find a recipe that suits ur taste buds", 
+    title : "Syntax Error | Stack overflow with no restrictions", 
+    description : "Find related bugs within seconds", 
     images: ["feature.png"]
   }, 
   openGraph : { 
-    title : "My Cook Pal - Recipe App", 
-    description : "Find a recipe that suits ur taste buds", 
-    url : "https://my-cook-pal.vercel.app",
+    title : "Syntax Error | Stack overflow with no restrictions", 
+    description : "Find related bugs within seconds", 
+    url : "https://syntax-error-hvu9.vercel.app",
     siteName :"My Cook Pal",
     images: ["feature.png"], 
 
   }
+
+
+  
 };
 
 export default function RootLayout({
