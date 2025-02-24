@@ -12,7 +12,7 @@ export const sendVerificationEmail = async ( email: string , token:string ) => {
     const confirmLink = `https://${domain}/auth/new-verification?token=${token}`
 
     await resend.emails.send({ 
-        from : "mail@hurdle.world", 
+        from : "mail@recursionerror.com", 
         to : email , 
         subject : "Confirm your email" , 
         html : `<p>Click <a href="${confirmLink}">here</a> to confirm email</p>`
@@ -25,7 +25,7 @@ export const sendPasswordVerificationEmail = async ( email: string , code:string
     
     
     await resend.emails.send({ 
-        from : "mail@hurdle.world", 
+        from : "mail@recursionerror.com", 
         to : email , 
         subject : "Password Reset Code" , 
         html : `<p>Your Verification Code is ${code}</p>`
