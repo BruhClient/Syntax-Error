@@ -26,9 +26,7 @@ function Editor({ data, onChange, holder,editorRef,placeholder="Start writting h
     if (!editorRef.current) {
       const editor = new EditorJS({
         holder: holder,
-        onReady : () => {
-          ref.current = []
-        },
+        
         placeholder: placeholder,
         tools: {
             header: Header ,
@@ -95,8 +93,7 @@ function Editor({ data, onChange, holder,editorRef,placeholder="Start writting h
           
           document.querySelectorAll('.image-tool__image-picture').forEach((x) => currentImages.push(x.attributes[1].nodeValue!))
 
-          console.log("CURRENT IMAGES",currentImages)
-          console.log("UPLOADED IMAGES",uploadedImages)
+          
           if (uploadedImages.length > currentImages.length) {
             uploadedImages.forEach(async (img) => {
               if (!currentImages.includes(img)) {

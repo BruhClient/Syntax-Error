@@ -28,7 +28,7 @@ const CreateNewIssue = () => {
     const form = useForm<CreateIssuePayload>({
         resolver : zodResolver(CreateIssueSchema), 
         defaultValues: { 
-            content : null,
+            content : {},
             title : "",
         }
     })

@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache"
  
 
 export const createIssue = async (values : CreateIssuePayload,threads : string[]) => { 
-
+    
     try { 
         const {content,title} = CreateIssueSchema.parse(values)
 
@@ -18,7 +18,7 @@ export const createIssue = async (values : CreateIssuePayload,threads : string[]
                 error : "Unauthorized"
             }
         }
-
+        
         const issue = await prisma.issue.create({
             data : { 
                 title , 
@@ -28,6 +28,8 @@ export const createIssue = async (values : CreateIssuePayload,threads : string[]
 
             }
         })
+
+       
 
         revalidatePath("/")
 
