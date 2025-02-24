@@ -15,6 +15,8 @@ export const getCommentReplies = async (skip : number , take:number,commentId : 
             include : { 
                 
                 author : true, 
+                likes : true
+               
                
             }
         })

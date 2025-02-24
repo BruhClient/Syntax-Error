@@ -72,9 +72,13 @@ const CommentReplyFeed: FunctionComponent<CommentReplyFeedProps> = ({commentId,t
     <div className="flex flex-col gap-2">
 
         {fetchedPages.map((reply : ExtendedCommentReply) => { 
-           
+            const likesAmt = reply.likes.length
+            const currentLike = reply.likes.find((like) => like.authorId === user?.id ) !== undefined
+
+
+            
             return <div key={reply.id}>
-                <CommentReplyCard message={reply.message} author={reply.author} id={reply.id} createdAt={reply.createdAt} authorId={reply.authorId} refetch={() => refetch()}/>
+                <CommentReplyCard message={reply.message} author={reply.author} id={reply.id} createdAt={reply.createdAt} authorId={reply.authorId} refetch={() => refetch()} initialLikeAmt={likesAmt} currentLike={currentLike} />
             </div> 
         })}
 

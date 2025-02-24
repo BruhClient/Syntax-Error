@@ -38,7 +38,7 @@ const Leaderboard = async () => {
 
     return ( <div className="hidden md:block pt-4 px-3">
         <h5 className="font-nokora">Most Helpful</h5>
-        <div>
+        <div key={"Leaderboard"}>
             {topUsers.map((user) => { 
                 return <>
                     <div key={user.id} className="flex items-center gap-2 px-2 py-2">
