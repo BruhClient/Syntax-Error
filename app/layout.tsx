@@ -20,7 +20,7 @@ const nokora = Nokora({
 
 
 export const metadata: Metadata = {
-  title: "Resursion Error",
+  title: "Recursion Error",
   icons :{
     icon : "/icon.svg"
   },
