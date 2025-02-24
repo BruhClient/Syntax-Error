@@ -1,5 +1,6 @@
 "use server"
 import { prisma } from "@/lib/db"
+import { revalidatePath } from "next/cache"
 
 export const asignSolution = async (commentId : string,value : boolean) => { 
     try { 
@@ -11,6 +12,8 @@ export const asignSolution = async (commentId : string,value : boolean) => {
                 isSolution : value
             }
         })
+
+        revalidatePath("/")
         if (value) { 
             return {
                 success : `Marked comment with #${commentId} as solution`
