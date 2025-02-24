@@ -5,6 +5,7 @@ import { z } from "zod"
 
 import { EditProfilePayload, EditProfileSchema } from "@/schema/EditProfileSchema"
 import { getUserByEmail, getUserByUsername } from "@/lib/users"
+import { revalidatePath } from "next/cache"
  
 
 export const editProfile = async (values : EditProfilePayload,initialEmail : string) => { 
@@ -38,6 +39,7 @@ export const editProfile = async (values : EditProfilePayload,initialEmail : str
             }
         })
         
+        revalidatePath("/")
         
         return { 
             success : "Credentials Updated !"

@@ -43,7 +43,7 @@ const Leaderboard = async () => {
                 return <>
                     <div key={user.id} className="flex items-center gap-2 px-2 py-2">
                     <Avatar className="h-6 w-6">
-                        <AvatarImage src={user.image ?? ""} alt="profile"></AvatarImage>
+                        <AvatarImage src={user.image ?? ""} alt="profile" className="object-cover"></AvatarImage>
                         <AvatarFallback>Profile</AvatarFallback>
                     </Avatar>
                     <div>
