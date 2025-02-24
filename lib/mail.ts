@@ -9,7 +9,7 @@ const domain = process.env.NEXT_PUBLIC_VERCEL_URL
 
 export const sendVerificationEmail = async ( email: string , token:string ) => { 
     
-    const confirmLink = `https://www.${domain}/auth/new-verification?token=${token}`
+    const confirmLink = `https://${domain}/auth/new-verification?token=${token}`
 
     await resend.emails.send({ 
         from : "mail@hurdle.world", 
