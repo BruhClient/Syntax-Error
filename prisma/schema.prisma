@@ -149,9 +149,9 @@ model CommentReply {
 }
 
 model CommentReplyLike {
-  author         User         @relation(fields: [authorId], references: [id])
+  author         User         @relation(fields: [authorId], references: [id] , onDelete: Cascade)
   authorId       String
-  commentReply   CommentReply @relation(fields: [commentReplyId], references: [id])
+  commentReply   CommentReply @relation(fields: [commentReplyId], references: [id] , onDelete: Cascade)
   commentReplyId String
   
 
