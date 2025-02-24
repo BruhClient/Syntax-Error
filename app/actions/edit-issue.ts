@@ -3,6 +3,7 @@ import { prisma } from "@/lib/db"
 import { z } from "zod"
 import { CreateIssuePayload, CreateIssueSchema } from "@/schema/CreateIssueSchema"
 import { auth } from "@/lib/auth"
+import { revalidatePath } from "next/cache"
  
 
 export const editIssue = async (values : CreateIssuePayload,issueId: string) => { 
@@ -27,6 +28,8 @@ export const editIssue = async (values : CreateIssuePayload,issueId: string) => 
                 content : content
             }
         })
+
+        revalidatePath("/")
 
         return {
             success : `Issue #${issue.id} has been updated`

@@ -43,7 +43,7 @@ const EditIssue: FunctionComponent<EditIssueProps> = ({issue,initialVotes,curren
             }
         })
     const {toast} = useToast()
-    const router = useRouter()
+    
     const [isPending,startTransition] = useTransition()
     function onSubmit(values : CreateIssuePayload) { 
             startTransition(() => { 
@@ -61,7 +61,7 @@ const EditIssue: FunctionComponent<EditIssueProps> = ({issue,initialVotes,curren
                         })
                     }
 
-                    router.refresh()
+                    
                 })
             })
         }
