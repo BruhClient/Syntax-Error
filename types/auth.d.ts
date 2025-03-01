@@ -5,7 +5,8 @@ export type  ExtendedUser = DefaultSession["user"] & {
     role : UserRole, 
     id : string,
     username : string,
-    image : string
+    image : string, 
+    isPremium : boolean
     
 }
 

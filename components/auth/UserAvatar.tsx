@@ -4,7 +4,7 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Crown, User } from "lucide-react";
 import { ModeToggle } from "../ModeToggle";
-import { Button } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { useSessionUser } from "@/hooks/use-session";
@@ -15,6 +15,8 @@ import {
     AvatarImage,
   } from "@/components/ui/avatar"
 import { UserRole } from "@prisma/client";
+import PremiumButton from "../PremiumButton";
+import { cn } from "@/lib/utils";
 
  
 const UserAvatar= () => {
@@ -72,7 +74,10 @@ const UserAvatar= () => {
             
             <DropdownMenuSeparator /> 
             <DropdownMenuGroup className="flex w-full justify-between p-2">
-                {user && <Button onClick={() => signOut()}>Log out</Button>}
+                {user && <div className="flex gap-2">
+                    <Button onClick={() => signOut()}>Log out</Button>
+                    {user.isPremium ? <a href={"https://billing.stripe.com/p/login/test_bIY9DPgQ109G7ew8ww?prefilled_email=" + user.email} target="_blank" className={cn(buttonVariants({variant : "secondary"}))}>Billing</a>: <PremiumButton />}
+                </div>}
                 
                 <ModeToggle />
             </DropdownMenuGroup>

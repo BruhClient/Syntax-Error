@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   description: "Coded and designed by Travis Ang",
   keywords : ["NextJs" , "TypeScript","JavaScript"], 
-  metadataBase : new URL("https://syntax-error-hvu9.vercel.app"), 
+  metadataBase : new URL("https://www.recursionerror.com"), 
   twitter : { 
     card: "summary_large_image", 
     site : "https://www.recursionerror.com", 

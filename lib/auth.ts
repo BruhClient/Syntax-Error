@@ -59,6 +59,7 @@ export const {
                 email: user?.email, 
                 image : user?.image,
                 role: user?.role, 
+                isPremium : user?.isPremium 
 
             }
         }, 
@@ -70,6 +71,7 @@ export const {
                 session.user.email = token.email as string
                 session.user.image = token.image as string
                 session.user.role = token.role as UserRole
+                session.user.isPremium = token.isPremium as boolean
             }
             return session
         }
